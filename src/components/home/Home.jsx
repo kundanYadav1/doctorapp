@@ -5,6 +5,11 @@ import Navbar2 from './navbar2/Navbar2'
 import Navbar3 from './navbar3/Navbar3'
 import SliderAndNews from './sliderAndNews/SliderAndNews'
 import data from './data/data.json'
+import AboutAndMission from './aboutAndMission/AboutAndMission'
+import FeatureAndService from './featureAndService/FeatureAndService'
+import Doctor from './doctor/Doctor'
+import Footer from './footer/Footer'
+import Middle from './middle/Middle'
 
 
 const Home = () => {
@@ -14,6 +19,12 @@ const Home = () => {
             <Navbar2 />
             <Navbar3 />
             <SliderAndNews slides={data.banner.start} />
+            <Middle />
+            <AboutAndMission />
+            <Doctor />
+            <FeatureAndService />
+            <Footer />
+
         </div>
     )
 }

@@ -13,8 +13,8 @@ const Navbar2 = () => {
         <div><img className='navbar211img' src={hospital} alt=''></img></div>
       </div>
       <div className='navbar22'>
-        <div className='navbar221'><img className='navbar221img' src={email} alt=''></img><Link to="">karancpppython@gmail.com</Link></div>
-        <div className='navbar221'><img className='navbar222img' src={phone} alt=''></img>9832826152</div>
+        <div className='navbar221'><img className='navbar221img' src={email} alt=''></img><Link to="">kundanprasadyadav@gmail.com</Link></div>
+        <div className='navbar221'><img className='navbar222img' src={phone} alt=''></img>7667471610</div>
         <div className='navbar221'><img className='navbar222img' src={complain} alt=''></img><Link to="">Complaint</Link></div>
       </div>
     </div>

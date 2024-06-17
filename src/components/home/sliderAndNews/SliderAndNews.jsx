@@ -1,10 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import './SliderAndNews.css'
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
 
 const SliderAndNews = ({ slides }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [newsData, setNewsData] = useState([]);
+
+    // useEffect for fetching news data
+    useEffect(() => {
+        const fetchNewsData = async () => {
+            try {
+                const response = await axios.get("http://localhost:3001/latestnews");
+                setNewsData(response.data.latestnewsdata);
+            } catch (error) {
+                console.error('Error fetching news data:', error);
+            }
+        };
+        fetchNewsData();
+        console.log(newsData); 
+    }, []);
 
     // useEffect for slides
     useEffect(() => {
@@ -24,36 +39,14 @@ const SliderAndNews = ({ slides }) => {
             </div>
             <div className='right'>
                 <div className='outerright'>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste 
-                        consectetur reprehenderit expedita doloribus a. Sequi quasi asperiores 
-                        eligendi voluptas qui enim commodi excepturi! Modi corrupti quia, aliquam 
-                        distinctio in commodi? Assumenda dignissimos dolores minus similique optio,
-                         commodi ea. Ducimus, cupiditate?</p>
-                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste 
-                        consectetur reprehenderit expedita doloribus a. Sequi quasi asperiores 
-                        eligendi voluptas qui enim commodi excepturi! Modi corrupti quia, aliquam 
-                        distinctio in commodi? Assumenda dignissimos dolores minus similique optio,
-                         commodi ea. Ducimus, cupiditate?</p>
-                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste 
-                        consectetur reprehenderit expedita doloribus a. Sequi quasi asperiores 
-                        eligendi voluptas qui enim commodi excepturi! Modi corrupti quia, aliquam 
-                        distinctio in commodi? Assumenda dignissimos dolores minus similique optio,
-                         commodi ea. Ducimus, cupiditate?</p>
-                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste 
-                        consectetur reprehenderit expedita doloribus a. Sequi quasi asperiores 
-                        eligendi voluptas qui enim commodi excepturi! Modi corrupti quia, aliquam 
-                        distinctio in commodi? Assumenda dignissimos dolores minus similique optio,
-                         commodi ea. Ducimus, cupiditate?</p>
-                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste 
-                        consectetur reprehenderit expedita doloribus a. Sequi quasi asperiores 
-                        eligendi voluptas qui enim commodi excepturi! Modi corrupti quia, aliquam 
-                        distinctio in commodi? Assumenda dignissimos dolores minus similique optio,
-                         commodi ea. Ducimus, cupiditate?</p>
-                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste 
-                        consectetur reprehenderit expedita doloribus a. Sequi quasi asperiores 
-                        eligendi voluptas qui enim commodi excepturi! Modi corrupti quia, aliquam 
-                        distinctio in commodi? Assumenda dignissimos dolores minus similique optio,
-                         commodi ea. Ducimus, cupiditate?</p>
+                {
+                        newsData.map((item, index) => (
+                            <div className='innerright' key={index}>
+                                <p className='date'>{item.date}</p>
+                                <p className='news'>{item.news}</p>
+                            </div>
+                        ))
+                    }
                 </div>
             </div>
         </div>

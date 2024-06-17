@@ -1,0 +1,29 @@
+.about-us-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch; /* Vertically center the content */
+    padding: 20px; /* Add some padding for spacing */
+    /* height: 600px; */
+    margin-left: 60px;
+    margin-right: 25px;
+  }
+  
+  .content-section {
+    flex-basis: 60%;
+  }
+  
+  .text-section {
+    margin-bottom: 20px;
+  }
+  
+  .image-section {
+    flex-basis: 40%;
+    /* Background image would be added here */
+    /* background-image: url('path-to-medical-professional-image.jpg'); */
+    background-image: url(D:\project\doctorapp\src\components\home\images\about.jpg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+  }
+  
