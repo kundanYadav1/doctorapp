@@ -14,7 +14,7 @@ function App() {
         <Route exact path='/' element={<Home />} />
         <Route exact path='/admin/*' element={<AdminPage />}>
         <Route exact path='news' element={<AddNews />} />
-        </Route>
+        </Route>                                          {/*nesting route*/}
         <Route exact path='/login' element={<Login />} />
         <Route exact path='/register' element={<Register />} />
 

@@ -1,6 +1,8 @@
 const express = require('express')
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRouters');
+const newRoute = require('./routes/newRoute');
+const adminRoute =require('./routes/adminRoute');
 const cors = require("cors");
 
 const app = express()
@@ -11,6 +13,8 @@ app.use(cors());
 
 app.use(express.json());
 app.use(userRoutes)
+app.use(newRoute)
+app.use(adminRoute)
 app.all('*', (req, res) => {
     res.status(404).send({ "message": `not a valid url ${req.originalUrl}` })
 })

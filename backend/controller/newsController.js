@@ -1,4 +1,4 @@
-const NewsTable = require('../models/latestNew');
+const NewsTable = require('../models/latestNews');
 
 
 

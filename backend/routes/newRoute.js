@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('../middleware/jwt')
-const news = require('../controllers/newsController')
+const news = require('../controller/newsController')
 
 
 router.post('/newsentry',jwt.checkJwt,news.addNews)
