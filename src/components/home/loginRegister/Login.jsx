@@ -29,7 +29,7 @@ const Login = () => {
       return;
     }
     setOtpFlag(true);
-    axios.post("http://localhost:8000/sendotp", { email: registrationData.email })
+    axios.post("http://localhost:3001/sendotp", { email: registrationData.email })
       .then((response) => {
         setOtpFlag(true);
         setCountdown(60); // 1 minute countdown
