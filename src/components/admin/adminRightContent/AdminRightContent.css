@@ -1,0 +1,8 @@
+.adminrightcontent {
+    overflow-y: auto;
+    width: 85%;
+    height: 100%;
+    margin-left: 20%;
+    position: fixed;
+    background-color: #f0f0f0;
+}

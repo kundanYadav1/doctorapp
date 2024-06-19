@@ -1,0 +1,85 @@
+.editadminimage {
+    margin-top: 50px;
+    height: 30%;
+    text-align: center;
+  }
+  .editadminprofileimage {
+    height: 250px;
+    width: 250px;
+    border: 2px solid #333;
+    border-radius: 8px;
+  }
+  .editadmindata {
+    padding: 20px;
+    display: flex;
+    margin-bottom: 180px;
+  }
+  
+  .editadmindataleft {
+    margin-top: 30px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  .editadmindataright {
+    margin-top: 30px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  .editadminlabel {
+    display: flex;
+    margin: 1px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  
+  }
+  
+  .adminlabelinput {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 30px;
+    margin-right: 100px;
+  }
+  
+  .adminlabelinputprofile {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-left: 120px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    height: 30px;
+  }
+  
+  .editadminprofileupdate {
+    text-decoration: none;
+    margin-top: 70px;
+    margin-left: 320px;
+    background-color: rgb(53, 53, 212);
+    color: white;
+    height: 40px;
+    width: 300px;
+    padding: 7px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  @media (min-width: 768px) {
+    .editadmindataleft {
+      width: 50%; /* Revert to original width on larger screens */
+    }
+  
+    .editadmindataright {
+      width: 50%; /* Revert to original width on larger screens */
+      margin-left: 20px; /* Restore left margin on larger screens */
+    }
+  
+    .editadminprofileupdate {
+      width: 160px; /* Revert to original width on larger screens */
+    }
+  }
