@@ -1,7 +1,8 @@
 const userModel = require('../models/users');
+const inventoryModel = require('../models/inventory')
 
 // Function to get approval request list
-const getApprovalRequestList = async (req, res) => {
+ getApprovalRequestList = async (req, res) => {
     if (req.data.user.role === "admin") {
         try {
             const doctorsList = await userModel.find({ role: 'doctor', approval: 1 });
@@ -16,7 +17,7 @@ const getApprovalRequestList = async (req, res) => {
 };
 
 // Function to approve doctor
-const approveDoctor = async (req, res) => {
+approveDoctor = async (req, res) => {
     if (req.data.user.role === "admin") {
         try {
             const { id } = req.body;    
@@ -40,7 +41,7 @@ const approveDoctor = async (req, res) => {
 };
 
 // Function to get doctor details
-const getDoctorDetails = async (req, res) => {
+getDoctorDetails = async (req, res) => {
     if (req.data.user.role === "admin") {
         try {
             const id = req.query.id;
@@ -65,10 +66,75 @@ const getDoctorDetails = async (req, res) => {
     }
 };
 
+getAllInventory = async (req,res)=>{
+    if(req.data.user.role == "admin"){
+        try{
+            const inventoryDetails =await inventoryModel.find()
+            res.status(200).json(inventoryDetails)
+        }catch(error){
+            //got error while doing server thing if you want to check either use some debug tool or console.log(error) here
+            res.status(500).json({status:500}) 
+        }
+        }
+        else{
+            //send this code when the access user is not admin
+            res.status(400).json({status:401})
+        }
+}
+updateInventory = async(req,res)=>{
+    if(req.data.user.role == "admin"){
+        try{
+            console.log(req.body.medicine_name)
+             req.body.medicine_name = req.body.medicine_name.toLowerCase()
+            const inventoryDetails =await inventoryModel.findOneAndUpdate({medicine_name:req.body.medicine_name},req.body,{ new: true })
+            res.status(200).json(inventoryDetails)
+        }catch(error){
+            //got error while doing server thing if you want to check either use some debug tool or console.log(error) here
+            res.status(500).json({status:500}) 
+        }
+        }
+        else{
+            //send this code when the access user is not admin
+            res.status(400).json({status:401})
+        }
+}
+
+bulkInsertInventory = async(req,res)=>{
+    if(req.data.user.role == "admin"){
+    try{
+    const doc = req.body.data
+    doc.forEach(obj => {
+        obj.medicine_name=obj.medicine_name.toLowerCase()
+      });
+    const result = await inventoryModel.bulkWrite(
+        doc.map(obj => ({
+            updateOne: {
+                filter: { medicine_name: obj.medicine_name },
+                update: { $set: obj },
+                upsert: true 
+            }
+        }))
+    );
+
+    res.status(200).json({status:200})
+    }catch(error){
+        console.log(error)
+        res.status(500).json({status:500}) 
+    }
+    }
+    else{
+        res.status(400).json({status:401})
+    }
+}
+
 module.exports = {
     getApprovalRequestList,
     approveDoctor,
-    getDoctorDetails
+    getDoctorDetails,
+    getAllInventory,
+    updateInventory,
+    bulkInsertInventory
+
 };
 
 
