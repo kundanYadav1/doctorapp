@@ -11,10 +11,14 @@
   display: flex;
 }
 
-.adminnavbar311,
-.adminnavbar312 {
+.adminnavbar311 {
   margin-top: 14px;
   margin-left: 20px;
+}
+.adminnavbar312 {
+  margin-top: 20px;
+  margin-left: 20px;
+
 }
 
 .adminnavbar311 a,
