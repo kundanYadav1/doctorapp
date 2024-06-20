@@ -1,0 +1,73 @@
+.register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+    margin-bottom: 65px;
+  }
+  
+  .register-right {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+  }
+  
+  .register-right h3 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .register-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .name-label {
+    margin-top: 10px;
+  }
+  
+  .quantity-label {
+    margin-top: 10px;
+  }
+  
+  .morning-label {
+    margin-top: 10px;
+  }
+  
+  .afternoon-label {
+    margin-top: 10px;
+  }
+  
+  .evening-label {
+    margin-top: 10px;
+  }
+  
+  .register-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .register-wrap {
+    text-align: center;
+  }
+  
+  .register-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .register-button:hover {
+    background-color: #45a049;
+  }
+  

@@ -1,0 +1,40 @@
+.view-prescription {
+    position: relative;
+    padding: 20px;
+    margin-bottom: 100px;
+}
+
+.doctor-name {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.appointmenth4 {
+    color:blue
+}
+
+.appointmenth3 {
+    color: red;
+}
+
+.view-prescription-right {
+    margin-top: 60px;
+}
+
+.prescription-details {
+    margin-top: 20px;
+}
+
+.prescription-details p {
+    margin: 10px 0;
+}
+
+.downloadButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}

@@ -18,6 +18,11 @@ import PatientPage from './components/patient/PatientPage'
 import PatientDashboard from './components/patient/patientDashboard/PatientDashboard';
 import PatientDetails from './components/patient/patientDetails/PatientDetails';
 import EditPatientDetails from './components/patient/editPatientDetails/EditPatientDetails';
+import DynamicGraph from './components/admin/dynamicGraph/DynamicGraph';
+import ForgotPassword from './components/home/loginRegister/ForgotPassword';
+import BookingNotifications from './components/doctor/bookingNotifications/BookingNotifications';
+import WritePrescription from './components/doctor/writePrescription/WritePrescription';
+import Prescription from './components/patient/prescription/Prescription';
 
 
 function App() {
@@ -35,21 +40,26 @@ function App() {
           <Route exact path='adminnotifications' element={<AdminNotifications />} />
           <Route exact path='adminnotifications/viewnotificationdetail/:id' element={<ViewNotificationDetail />} />
           <Route exact path='inventory' element={<Inventory />} />
+          <Route exact path='dynamicgraph' element={<DynamicGraph />} />
         </Route>
 
         <Route exact path='/doctor/*' element={<DoctorPage />}>
           <Route exact path='doctoravailability' element={<DoctorAvailability />} />
           <Route exact path='doctordetails' element={<DoctorDetails />} />
           <Route exact path='doctordetails/editdoctordetails' element={<EditDoctorDetails />} />
+          <Route exact path='bookingnotifications' element={<BookingNotifications />} />
+          <Route exact path='bookingnotifications/writeprescription/:id' element={<WritePrescription />} />
         </Route>
 
         <Route exact path='/patient/*' element={<PatientPage />} >
           <Route exact path='getapproveddoctors' element={<PatientDashboard />} />
           <Route exact path='patientdetails' element={<PatientDetails />} />
           <Route exact path='patientdetails/editpatientdetails' element={<EditPatientDetails />} />
+          <Route exact path='prescription' element={<Prescription />} />
         </Route>
         <Route exact path='/login' element={<Login />}/>
         <Route exact path='/register' element={<Register />} />
+        <Route exact path='/forgotpassword' element={<ForgotPassword />} />
       </Routes>
       
     </div>
