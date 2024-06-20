@@ -61,7 +61,7 @@ const EditAdminDetails = () => {
 
     return (
         <div className='editadmindetails'>
-            <div className='editadminimage'><img className='editadminprofileimage' src={`http://localhost:3001/profileImages/` + adminDetails.profile_image} alt='admin'></img></div>
+            <div className='editadminimage'><img className='editadminprofileimage' src={`http://localhost:3001/` + adminDetails.profile_image} alt='admin'></img></div>
             <input className='adminlabelinputprofile' type="file" accept=".jpg, .jpeg, .png" onChange={onChangeImage} />
             <div className='editadmindata'>
                 <div className='editadmindataleft'>

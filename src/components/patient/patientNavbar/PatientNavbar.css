@@ -1,0 +1,56 @@
+.patientnavbar {
+  height: 70px;
+  background-color: rgb(53, 53, 212);
+}
+
+.patientnavbar31 {
+  display: flex;
+}
+
+.patientnavbar311,
+.patientnavbar312 {
+  margin-top: 22px;
+  margin-left: 20px;
+}
+
+.patientnavbar311 a,
+.patientnavbar312 a {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+}
+
+.patientnavbar311 a:hover,
+.patientnavbar312 a:hover {
+  color: #00bcd4;
+}
+.patientlogout {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  height: 32px;
+  width: 80px;
+}
+.patientlogout:hover {
+  background-color: greenyellow;
+  color: black;
+}
+
+/* Media query for smaller screens */
+@media only screen and (max-width: 768px) {
+  .patientnavbar {
+    height: auto;
+    padding: 10px;
+  }
+
+  .patientnavbar31 {
+    flex-direction: column;
+  }
+
+  .patientnavbar311,
+  .patientnavbar312 {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}

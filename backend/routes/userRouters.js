@@ -25,6 +25,9 @@ router.post('/resendotp',user.resendOtp)
 router.post('/verifyOtp',user.verifyOtp)
 router.get('/getuserdetails',jwt.checkJwt,user.userDetails)
 router.patch('/updateuserdetails',jwt.checkJwt, uploadImage.single('profile_image'),user.updateDetails)
+router.post('/changePassword',user.changePassword)
+//this api will send the otp when user tries to change the password.
+router.post('/sendOtppassword',user.sendOtppassword)
 
 
 

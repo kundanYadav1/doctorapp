@@ -1,0 +1,86 @@
+.notificationimage {
+    margin-top: 50px;
+    height: 30%;
+  }
+  
+  .notificationprofileimage {
+    height: 250px;
+    width: 250px;
+    border: 2px solid black;
+    border-radius: 8px;
+  }
+  
+  .notificationdata {
+    display: flex;
+    margin-bottom: 180px;
+  }
+  
+  .notificationdataleft {
+    margin-top: 30px;
+    margin-left: 50px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  .notificationdataright {
+    margin-top: 30px;
+    margin-left: 20px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  .notificationlabel {
+    display: flex;
+    margin: 1px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  
+  }
+  
+  .notificationlabelp {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-left: 20px;
+  }
+  
+  .notificationprofileupdate1 {
+    text-decoration: none;
+    margin-top: 70px;
+    margin-left: 70px;
+    background-color: green;
+    color: white;
+    height: 40px;
+    width: 200px;
+    padding: 7px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .notificationprofileupdatelink1 {
+    color: white;
+    padding: 7px;
+    text-decoration: none;
+  }
+
+  .notificationprofileupdate2 {
+    text-decoration: none;
+    margin-top: 70px;
+    margin-left: 70px;
+    background-color: red;
+    color: white;
+    height: 40px;
+    width: 200px;
+    padding: 7px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .notificationprofileupdatelink2 {
+    color: white;
+    padding: 7px;
+    text-decoration: none;
+  }

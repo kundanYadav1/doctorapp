@@ -1,0 +1,86 @@
+.editpatientimage {
+  margin-top: 50px;
+  height: 30%;
+  text-align: center;
+}
+.editpatientprofileimage {
+  height: 250px;
+  width: 250px;
+  border: 2px solid #333;
+  border-radius: 8px;
+}
+.editpatientdata {
+  margin-left: 130px;
+  padding: 20px;
+  display: flex;
+  margin-bottom: 180px;
+}
+
+.editpatientdataleft {
+  margin-top: 30px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.editpatientdataright {
+  margin-top: 30px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.editpatientlabel {
+  display: flex;
+  margin: 1px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+.patientlabelinput {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 30px;
+  margin-right: 100px;
+}
+
+.patientlabelinputprofile {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-left: 120px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  height: 30px;
+}
+
+.editpatientprofileupdate {
+  text-decoration: none;
+  margin-top: 70px;
+  margin-left: 250px;
+  background-color: rgb(53, 53, 212);
+  color: white;
+  height: 40px;
+  width: 300px;
+  padding: 7px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .editpatientdataleft {
+    width: 50%; 
+  }
+
+  .editpatientdataright {
+    width: 50%; 
+    margin-left: 20px;
+  }
+
+  .editpatientprofileupdate {
+    width: 160px; 
+  }
+}

@@ -1,16 +1,16 @@
 .adminnavbar {
-    height:70px;
-    background-color: rgb(53, 53, 212);
+  height: 70px;
+  background-color: rgb(53, 53, 212);
 }
 
 .adminnavbar31 {
-    display:flex;
+  display: flex;
 }
 
 .adminnavbar311,
 .adminnavbar312 {
-    margin-top: 14px;
-    margin-left: 20px;
+  margin-top: 14px;
+  margin-left: 20px;
 }
 
 .adminnavbar311 a,
@@ -22,30 +22,30 @@
 
 .adminnavbar311 a:hover,
 .adminnavbar312 a:hover {
-    color: #00bcd4;
+  color: #00bcd4;
 }
-
 .adminlogout {
-    background-color: red;
-    color: white;
+  background-color: red;
+  color: white;
 }
 .adminlogout:hover {
-    background-color: greenyellow;
-  }
+  background-color: greenyellow;
+}
+
 /* Media query for smaller screens */
 @media only screen and (max-width: 768px) {
-    .adminnavbar {
-      height: auto;
-      padding: 10px;
-    }
-  
-    .adminnavbar31 {
-      flex-direction: column;
-    }
-  
-    .adminnavbar311,
-    .adminnavbar312 {
-      margin-left: 0;
-      margin-top: 10px;
-    }
+  .adminnavbar {
+    height: auto;
+    padding: 10px;
   }
+
+  .adminnavbar31 {
+    flex-direction: column;
+  }
+
+  .adminnavbar311,
+  .adminnavbar312 {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}

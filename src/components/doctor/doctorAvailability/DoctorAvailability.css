@@ -1,0 +1,51 @@
+.alldaycss {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.morningcss,
+.afternooncss,
+.eveningcss {
+    margin-bottom: 30px;
+    float: left;
+}
+
+.updatebutton {
+    font-size: large;
+    height: 40px;
+    width: 120px;
+    border-radius: 8px;
+    margin-top: 20px;
+    color: white;
+    background-color: rgb(53, 53, 212);
+}
+
+.timeslotcss {
+    margin: 0 auto;
+    width: 250px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.csslabel1,
+.csslabel2,
+.cssinput,
+.cssinput {
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 30px;
+}
+
+.cssinput1,
+.cssinput2 {
+    width: 110px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 6px;
+}
+
+.cssh3 {
+    float: left;
+    margin-left: 70px;
+}

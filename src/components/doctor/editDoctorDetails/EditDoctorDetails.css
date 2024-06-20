@@ -1,0 +1,85 @@
+.editdoctorimage {
+  margin-top: 50px;
+  height: 30%;
+  text-align: center;
+}
+.editdoctorprofileimage {
+  height: 250px;
+  width: 250px;
+  border: 2px solid #333;
+  border-radius: 8px;
+}
+.editdoctordata {
+  padding: 20px;
+  display: flex;
+  margin-bottom: 180px;
+}
+
+.editdoctordataleft {
+  margin-top: 30px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.editdoctordataright {
+  margin-top: 30px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.editdoctorlabel {
+  display: flex;
+  margin: 1px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+.doctorlabelinput {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 30px;
+  margin-right: 100px;
+}
+
+.doctorlabelinputprofile {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-left: 120px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  height: 30px;
+}
+
+.editdoctorprofileupdate {
+  text-decoration: none;
+  margin-top: 70px;
+  margin-left: 320px;
+  background-color: rgb(53, 53, 212);
+  color: white;
+  height: 40px;
+  width: 300px;
+  padding: 7px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .editdoctordataleft {
+    width: 50%; /* Revert to original width on larger screens */
+  }
+
+  .editdoctordataright {
+    width: 50%; /* Revert to original width on larger screens */
+    margin-left: 20px; /* Restore left margin on larger screens */
+  }
+
+  .editdoctorprofileupdate {
+    width: 160px; /* Revert to original width on larger screens */
+  }
+}

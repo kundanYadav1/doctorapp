@@ -4,18 +4,20 @@ const userModel = require('../models/users');
 const randomstring = require('randomstring');
 const nodemailer = require('nodemailer');
 const otpModel = require('../models/otp');
+require('dotenv').config();
+
 
 const jwtSecretKey = process.env.JWT_SECRET_KEY || "qwertyuiopasdfghjklzxcvbnmqwerty";
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-    },
+                user: 'ny88119@gmail.com',
+                pass: 'xhni prjn chca oyfz',
+            },
 });
 
-const login = async (req, res) => {
+ login = async (req, res) => {
     const { email, password } = req.body;
     try {
         const user = await userModel.findOne({ email });
@@ -34,7 +36,7 @@ const login = async (req, res) => {
     }
 };
 
-const register = async (req, res) => {
+ register = async (req, res) => {
     const { name, email, role, password, otp } = req.body;
     try {
         const otpUser = await otpModel.findOne({ email });
@@ -66,7 +68,7 @@ const register = async (req, res) => {
     }
 };
 
-const sendOtp = async (req, res) => {
+ sendOtp = async (req, res) => {
     const { email } = req.body;
     const otp = randomstring.generate({ length: 6, charset: '0123456789' });
     try {
@@ -100,7 +102,7 @@ const sendOtp = async (req, res) => {
     }
 };
 
-const verifyOtp = async (req, res) => {
+ verifyOtp = async (req, res) => {
     const { email, otp } = req.body;
     try {
         const user = await userModel.findOne({ email });
@@ -127,7 +129,7 @@ const verifyOtp = async (req, res) => {
     }
 };
 
-const resendOtp = async (req, res) => {
+ resendOtp = async (req, res) => {
     const { email } = req.body;
     const otp = randomstring.generate({ length: 6, charset: '0123456789' });
     try {
@@ -161,7 +163,7 @@ const resendOtp = async (req, res) => {
     }
 };
 
-const userDetails = async (req, res) => {
+ userDetails = async (req, res) => {
     try {
         const id = req.data.user.id;
         const userDetail = await userModel.findById(id);
@@ -171,7 +173,7 @@ const userDetails = async (req, res) => {
     }
 };
 
-const updateDetails = async (req, res) => {
+ updateDetails = async (req, res) => {
     try {
         const id = req.data.user.id;
         const newProfileImage = req.file ? { profile_image: req.file.filename } : {};
@@ -191,6 +193,87 @@ const updateDetails = async (req, res) => {
     }
 };
 
+changePassword = async (req, res) => {
+    try {
+      const { email, password, otp } = req.body;
+  
+      // Input validation
+      if (!email || !password || !otp) {
+        return res.status(400).json({ status: 400, message: 'All fields are required' });
+      }
+  
+      const userdata = await userModel.findOne({ email });
+      if (!userdata) {
+        return res.status(404).json({ status: 404, message: 'User not found' });
+      }
+  
+      if (userdata.otpExpires < new Date()) {
+        // send response that otp expires
+        return res.status(410).json({ status: 410, message: 'OTP expired' });
+      }
+  
+      if (userdata.otp !== otp) {
+        // send response for invalid otp
+        return res.status(401).json({ status: 401, message: 'Invalid OTP' });
+      }
+  
+      userdata.otp = undefined;
+      userdata.otpExpires = undefined;
+  
+      const salt = await bcrypt.genSalt(10);
+      const secPassword = await bcrypt.hash(password, salt);
+      userdata.password = secPassword;
+      await userdata.save();
+  
+      res.status(200).json({ status: 200, message: 'Password changed successfully' });
+    } catch (error) {
+      console.error('Error in changePassword:', error);
+      res.status(500).json({ status: 500, message: 'Internal Server Error' });
+    }
+  };
+
+
+  const sendOtppassword = async (req, res) => {
+    const { email } = req.body;
+    const charset = '0123456789';
+    const otp = randomstring.generate({
+        length: 6,
+        charset: charset,
+    });
+
+    try {
+        if (!email) {
+            return res.status(400).json({ status: 400, message: 'Email is required' });
+        }
+
+        const userdata = await userModel.findOne({ email });
+        if (!userdata) {
+            return res.status(404).json({ status: 404, message: 'User not found' });
+        }
+
+        const otpExpires = new Date();
+        otpExpires.setMinutes(otpExpires.getMinutes() + 5);
+
+        userdata.otp = otp;
+        userdata.otpExpires = otpExpires;
+        await userdata.save();
+
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'OTP for Change Password',
+            text: `Your OTP for Change Password is ${otp}`,
+        };
+
+        await transporter.sendMail(mailOptions);
+        res.status(200).json({ status: 200, message: 'OTP sent successfully' });
+    } catch (error) {
+        console.error('Error in sendOtppassword:', error);
+        res.status(500).json({ status: 500, message: 'Internal Server Error' });
+    }
+};
+
+
 module.exports = {
     register,
     login,
@@ -199,6 +282,8 @@ module.exports = {
     verifyOtp,
     userDetails,
     updateDetails,
+    changePassword,
+    sendOtppassword
 };
 
 

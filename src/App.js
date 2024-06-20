@@ -7,26 +7,53 @@ import AdminPage from './components/admin/AdminPage';
 import AddNews from './components/admin/addNews/AddNews';
 import AdminDetails from './components/admin/adminDetails/AdminDetails'
 import EditAdminDetails from './components/admin/editAdminDetails/EditAdminDetails';
+import DoctorPage from './components/doctor/DoctorPage'
+import DoctorAvailability from './components/doctor/doctorAvailability/DoctorAvailability'
+import DoctorDetails from './components/doctor/doctorDetails/DoctorDetails'
+import EditDoctorDetails from './components/doctor/editDoctorDetails/EditDoctorDetails'
+import AdminNotifications from './components/admin/adminNotifications/AdminNotifications'
+import ViewNotificationDetail from './components/admin/viewNotificationDetail/ViewNotificationDetail'
+import Inventory from './components/admin/inventory/Inventory';
+import PatientPage from './components/patient/PatientPage'
+import PatientDashboard from './components/patient/patientDashboard/PatientDashboard';
+import PatientDetails from './components/patient/patientDetails/PatientDetails';
+import EditPatientDetails from './components/patient/editPatientDetails/EditPatientDetails';
 
 
 function App() {
+  // const isAuth = localStorage.getItem("authToken");
   return (
-    <div>
+    <div className="App">
+      
       <Routes>
         <Route exact path='/' element={<Home />} />
+
         <Route exact path='/admin/*' element={<AdminPage />}>
-        <Route exact path='news' element={<AddNews />} />
-        <Route exact path='admindetails' element={<AdminDetails />} />
-        <Route exact path='admindetails/editadmindetails' element={<EditAdminDetails />} />
-        </Route>                                          {/*nesting route*/}
-        <Route exact path='/login' element={<Login />} />
+          <Route exact path='news' element={<AddNews />} />
+          <Route exact path='admindetails' element={<AdminDetails />} />
+          <Route exact path='admindetails/editadmindetails' element={<EditAdminDetails />} />
+          <Route exact path='adminnotifications' element={<AdminNotifications />} />
+          <Route exact path='adminnotifications/viewnotificationdetail/:id' element={<ViewNotificationDetail />} />
+          <Route exact path='inventory' element={<Inventory />} />
+        </Route>
+
+        <Route exact path='/doctor/*' element={<DoctorPage />}>
+          <Route exact path='doctoravailability' element={<DoctorAvailability />} />
+          <Route exact path='doctordetails' element={<DoctorDetails />} />
+          <Route exact path='doctordetails/editdoctordetails' element={<EditDoctorDetails />} />
+        </Route>
+
+        <Route exact path='/patient/*' element={<PatientPage />} >
+          <Route exact path='getapproveddoctors' element={<PatientDashboard />} />
+          <Route exact path='patientdetails' element={<PatientDetails />} />
+          <Route exact path='patientdetails/editpatientdetails' element={<EditPatientDetails />} />
+        </Route>
+        <Route exact path='/login' element={<Login />}/>
         <Route exact path='/register' element={<Register />} />
-
-
       </Routes>
+      
     </div>
   );
-  
 }
 
 export default App;

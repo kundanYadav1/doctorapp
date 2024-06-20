@@ -1,0 +1,23 @@
+.patientsidebar {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    padding: 20px 0;
+}
+
+.patienticon {
+    margin-bottom: 20px;
+}
+.patienticon a {
+    margin-left: 50px;
+    float: left;
+    text-decoration: none;
+    color: blue;
+    font-size: 20px;
+}
+
+.patienticon a:hover {
+    color: #00bcd4;
+}
