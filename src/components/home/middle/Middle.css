@@ -85,7 +85,11 @@
     font-weight: bold;
     text-align: center;
     text-decoration: none;
-    background-color: rgb(53, 53, 212);
+    background: linear-gradient(
+    82.3deg,
+    rgba(150, 93, 233, 1) 10.8%,
+    rgba(99, 88, 238, 1) 94.3%
+  );
     color: white;
     border: 1px solid white;
     border-radius: 8px;
