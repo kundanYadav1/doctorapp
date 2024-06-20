@@ -1,8 +1,8 @@
 const userModel = require('../models/users')
 const Bookings = require('../models/booking')
-const DoctorAvailability = require('../models/doctorAvalability')
+const DoctorAvailability = require('../models/doctorAvalability');
 
-
+const mongoose = require('mongoose');
 
 
 getApprovedDoctors = async(req,res)=>{
@@ -34,7 +34,7 @@ getAlreadyBookedslots = async (req,res) =>{
     try {
         console.log(id)
         const now = new Date();
-        console.log(now)
+        now.setHours(0, 0, 0, 0)
         const next7Days = new Date();
         next7Days.setDate(now.getDate() + 7);
         console.log(next7Days)
@@ -68,7 +68,42 @@ else{
 }
 }
 
+getAllBookings = async (req,res)=>{
+    try{
+    const id = req.data.user.id
+    console.log(id)
+    const details = await  Bookings.aggregate([
+        {
+          $match: {
+            patient_id: new mongoose.Types.ObjectId(id)
+          }
+        },
+        {
+          $group: {
+            _id: "$doctor_id",
+            appointments: { $push: "$$ROOT" }
+          }
+        },
+        {
+            $lookup: {
+              from: 'users', 
+              localField: '_id',
+              foreignField: '_id',
+              as: 'doctorDetails'
+            }
+          },
+          {
+            $unwind: "$doctorDetails" 
+          }
+      ]);
+    res.status(200).json(details)
+    }
+    catch(error){
+        console.log(error)
+        res.status(500).json({status:500});
+    }
 
+}
 
 
 
@@ -77,6 +112,7 @@ module.exports ={
     getApprovedDoctors,
     getDoctorAvailablity,
     getAlreadyBookedslots,
-    submitBookings
+    submitBookings,
+    getAllBookings
 
 }

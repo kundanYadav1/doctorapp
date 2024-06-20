@@ -233,7 +233,7 @@ changePassword = async (req, res) => {
   };
 
 
-  const sendOtppassword = async (req, res) => {
+ sendOtppassword = async (req, res) => {
     const { email } = req.body;
     const charset = '0123456789';
     const otp = randomstring.generate({

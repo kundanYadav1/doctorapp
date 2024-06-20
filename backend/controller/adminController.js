@@ -1,70 +1,69 @@
-const userModel = require('../models/users');
-const inventoryModel = require('../models/inventory')
+const userModel = require('../models/users')
+const inventoryModel = require('../models/inventory');
+const { get } = require('mongoose');
+const Bookings = require('../models/booking')
 
-// Function to get approval request list
- getApprovalRequestList = async (req, res) => {
-    if (req.data.user.role === "admin") {
-        try {
-            const doctorsList = await userModel.find({ role: 'doctor', approval: 1 });
-            return res.status(200).json({ status: 200, doctorsList: doctorsList });
-        } catch (error) {
-            console.error('Error fetching approval request list:', error);
-            return res.status(500).json({ status: 500, message: error.message });
-        }
-    } else {
-        return res.status(401).json({ status: 401, message: 'Unauthorized' });
+
+// get all doctors whose profiles are not approved
+getApprovalRequestList = async(req,res)=>{
+    if(req.data.user.role === "admin"){
+    try {
+        const doctorsList = await userModel.find({ role: 'doctor', approval: 1 });
+        res.status(200).json({ status : 200,doctorsList: doctorsList });
+    } catch (error) {
+        //got error while doing server thing if you want to check either use some debug tool or console.log(error) here
+        res.status(404).json({status:500});
     }
-};
+     }
+    else{
+    //send this code when the access user is not admin
+    res.status(400).json({ status: 401 });
+   }
+}
 
-// Function to approve doctor
-approveDoctor = async (req, res) => {
-    if (req.data.user.role === "admin") {
-        try {
-            const { id } = req.body;    
-            const updateData = { approval: 2 };
 
-            // Using findByIdAndUpdate to update the user's approval status
-            const updatedUser = await userModel.findByIdAndUpdate(id, updateData, { new: true });
-
-            if (!updatedUser) {
-                return res.status(404).json({ status: 404, message: 'User not found' });
-            }
-
-            return res.status(200).json({ status: 200, updatedUser: updatedUser });
-        } catch (error) {
-            console.error('Error approving doctor:', error);
-            return res.status(500).json({ status: 500, message: error.message });
+//aprove the particular doctor profile.
+approveDoctor = async(req,res)=>{
+    if(req.data.user.role == "admin"){
+    try{
+        const {_id} = req.body
+        const updateData ={
+            approval:req.body.approval
         }
-    } else {
-        return res.status(401).json({ status: 401, message: 'Unauthorized' });
+          await  userModel.findByIdAndUpdate(_id,updateData,{ new: true })
+        res.status(200).json({status:200})
+    
+    }catch(error){
+        //got error while doing server thing if you want to check either use some debug tool or console.log(error) here
+        res.status(500).json({status:500})
+    
     }
-};
+    }
+    else{
+        //send this code when the access user is not admin
+        res.status(400).json({status:401})
+    }
+}
 
-// Function to get doctor details
-getDoctorDetails = async (req, res) => {
-    if (req.data.user.role === "admin") {
-        try {
-            const id = req.query.id;
 
-            if (!id) {
-                return res.status(400).json({ status: 400, message: 'Doctor ID is required' });
-            }
-
-            const userDetails = await userModel.findById(id);
-
-            if (!userDetails) {
-                return res.status(404).json({ status: 404, message: 'Doctor not found' });
-            }
-
-            return res.status(200).json({ status: 200, userDetails: userDetails });
-        } catch (error) {
-            console.error('Error fetching doctor details:', error);
-            return res.status(500).json({ status: 500, message: error.message });
+//get particular doctors details from the admin side
+getDoctorDetails=async(req,res)=>{
+    if(req.data.user.role == "admin"){
+        try{
+            const id = req.query.id
+            const userDetails =await userModel.findById({_id:id})
+            res.status(200).json(userDetails)
+        }catch(error){
+            //got error while doing server thing if you want to check either use some debug tool or console.log(error) here
+            res.status(500).json({status:500}) 
         }
-    } else {
-        return res.status(401).json({ status: 401, message: 'Unauthorized' });
-    }
-};
+        }
+        else{
+            //send this code when the access user is not admin
+            res.status(400).json({status:401})
+        }
+}
+
 
 getAllInventory = async (req,res)=>{
     if(req.data.user.role == "admin"){
@@ -81,6 +80,7 @@ getAllInventory = async (req,res)=>{
             res.status(400).json({status:401})
         }
 }
+
 updateInventory = async(req,res)=>{
     if(req.data.user.role == "admin"){
         try{
@@ -115,7 +115,7 @@ bulkInsertInventory = async(req,res)=>{
             }
         }))
     );
-
+    console.log(result)
     res.status(200).json({status:200})
     }catch(error){
         console.log(error)
@@ -127,15 +127,103 @@ bulkInsertInventory = async(req,res)=>{
     }
 }
 
+
+
+getTotalPatientByDoctor = async (req,res) =>{
+        try{
+  
+
+ const details=  await Bookings.aggregate([
+  {
+    $group: {
+      _id: '$doctor_id', 
+      uniquePatients: { $addToSet: '$patient_id' },
+      count: { $sum: 1 } 
+    }
+  },
+  {
+    $project: {
+      _id: 1, 
+      uniquePatientCount: { $size: '$uniquePatients' }, 
+      count: 1
+    }
+  },
+  {
+    $lookup: {
+      from: 'users',
+      localField: '_id',
+      foreignField: '_id',
+      as: 'doctorDetails'
+    }
+  },
+  {
+    $unwind: "$doctorDetails" // To deconstruct the array from the lookup
+  }
+])
+
+
+        res.status(200).json(details)
+        }catch(error){
+            console.log(error)
+            res.status(500).json({status:500}) 
+        }
+   
+}
+
+
+getTotalPAtientByDate = async (req,res)=>{
+    try{
+        const date = await Bookings.aggregate([{ $group: { _id: null, maxDate: { $max: "$bookingDate" } } }])
+        console.log(date)
+        const maxDate = date[0].maxDate
+        maxDate.setHours(0, 0, 0, 0)
+        console.log(maxDate)
+        maxDate.setDate(maxDate.getDate() -9);
+        console.log(maxDate)
+
+        const details=  await Bookings.aggregate([
+            {
+              $match: {
+                bookingDate: {
+                  $gte: new Date(maxDate)
+                }
+              }
+            },
+            {
+              $group: {
+                _id: {
+                  $dateToString: { format: "%Y-%m-%d", date: "$bookingDate" }
+                },
+                totalPatients: { $sum: 1 }
+              }
+            },
+            {
+              $sort: { _id: 1 }
+            }
+          ]);
+          console.log(details.length)
+          const transformedResult = details.reduce((acc, current) => {
+            acc[current._id] = { totalPatients: current.totalPatients };
+            return acc;
+          }, {});
+
+          res.status(200).json(transformedResult)
+        }catch(error){
+            console.log(error)
+            res.status(500).json({status:500}) 
+        }
+}
+
 module.exports = {
     getApprovalRequestList,
     approveDoctor,
     getDoctorDetails,
     getAllInventory,
     updateInventory,
-    bulkInsertInventory
-
-};
+    bulkInsertInventory,
+    getTotalPatientByDoctor,
+    getTotalPAtientByDate
+}
 
 
 
