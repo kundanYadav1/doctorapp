@@ -62,7 +62,8 @@ const Prescription = () => {
     return (
         <div className='view-prescription'>
             <div className='doctor-name'>
-                <p><strong>Doctor Name:</strong> {prescriptionData[0].doctorDetails.name}</p>
+            <p><strong>Doctor Name:</strong> {prescriptionData?.[0]?.doctorDetails?.name || 'Loading...'}</p>
+                {/* <p><strong>Doctor Name:</strong> {prescriptionData[0].doctorDetails.name}</p> */}
             </div>
             <div className='view-prescription-right'>
                 <h3 className='appointmenth3'>Prescription Details</h3>
