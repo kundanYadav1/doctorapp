@@ -48,25 +48,26 @@ getAlreadyBookedslots = async (req,res) =>{
     }
 }
 
+const submitBookings = async (req, res) => {
+  try {
+    if (req.data.user.role === "patient") {
+      const id = req.data.user.id;
+      req.body.patient_id = id;
+      const dateObject = new Date(req.body.bookingDate);
+      req.body.bookingDate = dateObject;
 
-submitBookings = async (req,res)=>{
-    if(req.data.user.role == "patient"){
-    const id = req.data.user.id
-    req.body.patient_id = id
-    const dateObject = new Date(req.body.bookingDate);
-    req.body.bookingDate=dateObject
-    try {
-        const data = new Bookings(req.body);
-        const savedData = await data.save();
-        res.status(200).json(savedData);
-    } catch (error) {
-        res.status(500).json({status:500});
+      const data = new Bookings(req.body);
+      const savedData = await data.save();
+      return res.status(200).json(savedData);
+    } else {
+      console.error('Unauthorized access attempt');
+      return res.status(401).json({ status: 401, message: "Unauthorized" });
     }
-}
-else{
-    res.status(400).json({status:401})
-}
-}
+  } catch (error) {
+    console.error('Error occurred while submitting booking:', error.message);
+    return res.status(500).json({ status: 500, message: "Internal Server Error" });
+  }
+};
 
 getAllBookings = async (req,res)=>{
     try{
