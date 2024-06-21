@@ -14,7 +14,7 @@ const PORT = 3001;
 app.use(cors());
 
 app.use(express.json());
-app.use(express.static('upload'))
+app.use(express.static('uploads'))
 app.use(userRoutes)
 app.use(newRoute)
 app.use(adminRoute)
