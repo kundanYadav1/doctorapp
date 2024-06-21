@@ -10,6 +10,7 @@ const AdminSidebar = () => {
       <div className='adminicon'><NavLink to="/admin/admindetails" activeClassName="active">My Profile</NavLink></div>
       <div className='adminicon'><NavLink to="/admin/adminnotifications" activeClassName="active">Notifications</NavLink></div>
       <div className='adminicon'><NavLink to="/admin/inventory" activeClassName="active">Inventory</NavLink></div>
+      <div className='adminicon'><NavLink to="/admin/dynamicgraph" activeClassName="active">Dynamic Graph</NavLink></div>
     </div>
   )
 }
